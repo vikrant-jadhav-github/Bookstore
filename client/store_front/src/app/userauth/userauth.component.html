@@ -1,0 +1,53 @@
+<div class="authform">
+            
+    <div class="heading">
+        <h1 *ngIf="!isRegistered">REGISTER</h1>
+        <h1 *ngIf="isRegistered">LOGIN</h1>
+    </div>
+    
+    <form *ngIf="isRegistered" method="POST" #authform="ngForm" (ngSubmit)="login(authform.value)">
+        <input type="email" name="email" ngModel placeholder="Enter Email">
+        <input type="password" name="password" ngModel placeholder="Enter Password">
+        <button type="submit">Login</button>
+        <p (click) = "isRegistered = !isRegistered">Don't have an account? Register</p>
+    </form>
+
+    <form *ngIf="!isRegistered" method="POST" (ngSubmit)="register()">
+        
+        <input type="email" name="email" [(ngModel)]="userdata.email" placeholder="Enter Email">
+        <input type="text" name="name" [(ngModel)]="userdata.name" placeholder="Enter Full Name">
+        <input type="password" name="password" [(ngModel)]="userdata.password" placeholder="Enter Password">
+        <input type="password" name="password2" [(ngModel)]="userdata.password2" placeholder="Confirm Password">
+
+        <div class="rolechoices">
+
+            <label for="selectedRole">Select Role:</label>
+            <select name="selectedRole" [(ngModel)]="selectedRole">
+                <option value="Buyer">Buyer</option>
+                <option value="Seller">Seller</option>
+            </select>
+
+        </div>
+        
+        <div class="buyerdata" *ngIf="selectedRole === 'Buyer' ">
+
+            <input type="text" name="city" [(ngModel)]="roledata.city" placeholder="Enter City">
+            <input type="text" name="state" [(ngModel)]="roledata.state" placeholder="Enter State">
+            <input type="text" name="country" [(ngModel)]="roledata.country" placeholder="Enter Country">
+            <input type="text" name="landmark" [(ngModel)]="roledata.landmark" placeholder="Enter Landmark">
+
+        </div>
+
+        <div class="sellerdata" *ngIf="selectedRole === 'Seller' ">
+
+            <input type="text" name="storename" [(ngModel)]="roledata.storename" placeholder="Enter Store Name">
+            <input type="number" name="totalproductsold" [(ngModel)]="roledata.totalproductsold" placeholder="Enter Total Products Sold">
+        
+        </div>
+
+        <button type="submit">Register</button>
+        <p (click)="isRegistered = !isRegistered">Already have an account? Login</p>
+
+    </form>
+
+</div>

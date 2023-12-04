@@ -1,0 +1,55 @@
+<header>
+    
+    <nav>
+        
+        <div class="branding">
+    
+            <div class="product">
+                <h1>BOOKSTORE</h1>
+                <p>Online Book Store</p>
+                <img src="assets/booklogo.png" alt="">
+            </div>
+    
+        </div>
+    
+        <div class="dashboard">
+
+            <div *ngIf="!isLoggedIn" class="roledash">
+                
+                <h4>WELCOME TO BOOKSTORE</h4>
+                <a routerLink="">Home</a>
+                <a routerLink="/Book">Books</a>
+                <a routerLink="/Cart">{{cartItems.length>0 ? 'Cart('+cartItems.length+')' : 'Cart'}}</a>
+    
+            </div>
+    
+            <div *ngIf="isLoggedIn && loginData && loginData.role === 'Buyer'" class="roledash">
+    
+                <h3>HELLO, {{loginData.name.split(' ')[0].toUpperCase()}}!</h3>
+
+                <a routerLink="/Home">Home</a>
+                <a routerLink="/Home/MyBooks">Your Orders</a>
+                <a routerLink="/Home/Cart">{{cartItems.length>0 ? 'Cart('+cartItems.length+')' : 'Cart'}}</a>
+                <a (click)="logout()" routerLink="/">Logout</a>
+    
+            </div>
+    
+            <div *ngIf="isLoggedIn && loginData && loginData.role === 'Seller'" class="roledash">
+    
+                <h3>HELLO, {{loginData.name.split(' ')[0].toUpperCase()}}!</h3>
+
+                <a routerLink="/Home">Home</a>
+                <a routerLink="/Home/ChangeBook">Add Books</a>
+                <a routerLink="/Home/MyBooks">Your Items</a>
+                <a (click)="logout()" routerLink="/">Logout</a>
+    
+            </div>
+    
+    
+        </div>
+    
+    </nav>
+    
+</header>
+
+

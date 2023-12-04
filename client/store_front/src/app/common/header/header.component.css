@@ -1,0 +1,58 @@
+header{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.branding{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.product{
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3em;
+}
+
+.product img{
+    height: 12rem;
+}
+
+.roledash{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.roledash a{
+    text-decoration: none;
+    font-size: larger;
+}
+
+.profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.profile img{
+    height: 2.5rem;
+}

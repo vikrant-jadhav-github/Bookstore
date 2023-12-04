@@ -1,0 +1,98 @@
+.cart{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.cartitems{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    column-gap: 2rem;
+    row-gap: 1rem;
+}
+
+.items{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--primarybg);
+    padding: 1rem;
+    width: 20rem;
+}
+
+.options{
+    display: flex;
+    gap: 1rem;
+}
+
+.options button{
+    padding: .5rem;
+    width: 100%;
+}
+
+.cover{
+    height: 20rem;
+    width: 100%;
+}
+
+.cover img{
+    height: 100%;
+    width: 100%;
+}
+
+
+.purchasingorder{
+    border: 3px solid var(--secondarybg);
+    background: var(--primarybg);
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.purchasingorder textarea{
+    background: var(--secondarybg);
+}
+
+.purchasingorder textarea::placeholder{
+    color: white;
+}
+
+.purchasingorder input{
+    background: var(--secondarybg);
+    color: white;
+}
+
+.purchasingorder button{
+    background: var(--secondarybg);
+    color: white;
+}
+
+.purchasingorder form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+}
+
+.purchasingorder textarea{
+    padding: 1rem;
+}
+
+.purchasingorder input{
+    padding: 1rem;
+    width: 34%;
+}
+
+.purchasingorder button{
+    padding: 1rem;
+    width: 25%;
+}

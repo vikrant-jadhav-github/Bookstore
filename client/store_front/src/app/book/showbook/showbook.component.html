@@ -1,0 +1,29 @@
+<div class="showbook">
+
+    <div class="heading">
+        <h1>BOOK DETAILS</h1>
+    </div>
+
+    <div class="book">
+        
+        <div class="bookcover">
+            <img src={{bookData.cover}} alt="Marvel">
+        </div>
+    
+        <div class="bookdetails">
+            <h1>TITLE : {{bookData.title}}</h1>
+            <h3>AUTHOR : {{bookData.author}}</h3>
+            <h3>GENRE : {{bookData.genre}}</h3>
+            <h3>PRICE : ${{bookData.price}}</h3>
+            <h3>TOTAL SOLD : {{bookData.totalsold}}</h3>
+            <h3>TOTAL AVAILABLE : {{bookData.totalavailable}}</h3>
+            <h3>SOLD BY : {{loginData && loginData.role === 'Seller' ? 'YOU' : bookData.seller?.storename}}</h3>
+            <div *ngIf="loginData.role !== 'Seller'" class="buyoptions">
+                <button (click)="addToCart(bookData)">ADD TO CART</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

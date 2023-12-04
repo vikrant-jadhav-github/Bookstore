@@ -1,0 +1,84 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'ngx-toastr/toastr';
+
+:root{
+    --primarybg: rgb(32, 41, 58);
+    --secondarybg: rgb(24, 26, 27);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    color: white;
+    background: var(--primarybg);
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+input{
+    background: var(--primarybg);
+    border: none;
+    color: white;
+}
+
+input::placeholder{
+    color: white;
+}
+
+select{
+    background: var(--primarybg);
+    color: white;
+}
+
+button{
+    background: var(--primarybg);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 2rem;
+}
+
+.nodata{
+    position: absolute;
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 5;
+    left: 0;
+    bottom: 5;
+    right: 0;
+}
+
+.nodata img{
+    height: 100%;
+    width: 80%;
+}
+
+.heading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 3px solid var(--primarybg);
+    padding: 0.5rem;
+    width: 100%;
+}
+
+textarea{
+    color: white;
+}

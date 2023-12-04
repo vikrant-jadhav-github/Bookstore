@@ -1,0 +1,22 @@
+<div class="bookform">
+    
+    <div class="heading">
+      <h1 *ngIf="!id">CREATE</h1>
+      <h1 *ngIf="id">UPDATE</h1>
+    </div>
+
+    <div class="form" encType="multipart/form-data">
+      <form method="POST" #bookform="ngForm" (ngSubmit)="!id ? createBook(bookform.value) : updateBook(bookform.value)">
+        <input type="text" name="title" [(ngModel)]="id && bookData.title" placeholder="Enter Title">
+        <input type="text" name="author" [(ngModel)]="id && bookData.author" placeholder="Enter Author">
+        <input type="number" name="price" [(ngModel)]="id && bookData.price" placeholder="Enter Price">
+        <input type="number" name="totalsold" [(ngModel)]="id && bookData.totalsold" placeholder="Enter Total Sold">
+        <input type="number" name="totalavailable" [(ngModel)]="id && bookData.totalavailable" placeholder="Enter Total Available">
+        <input type="text" name="genre" [(ngModel)]="id && bookData.genre" placeholder="Enter Genre">
+        <input type="file" name="cover" (change) = "onFileSelected($event)" ngModel>
+        <button type="submit">{{id ? 'UPDATE' : 'CREATE'}}</button>
+      </form>
+    
+    </div>
+
+  </div>

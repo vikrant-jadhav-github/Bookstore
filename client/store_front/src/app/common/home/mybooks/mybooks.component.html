@@ -1,0 +1,90 @@
+<div class="heading">
+        
+    <h1 *ngIf="loginData && loginData.role === 'Buyer'">YOUR ORDERS</h1>
+    <h1 *ngIf="loginData && loginData.role === 'Seller'">YOUR BOOKS</h1>
+    
+</div>
+    
+<div *ngIf="loginData && loginData.role === 'Seller'" class="mybooks">
+
+        <div *ngIf="myBooksData.length == 0" class="nodata">
+            <img src="https://cdn.dribbble.com/users/633133/screenshots/3218559/media/3490827c0bba959b5bc92bb031f5dc05.png?resize=800x600&vertical=center" alt="">  
+        </div>
+        
+        <div class="books" *ngFor="let myBooksData of myBooksData">
+            <div class="cover">
+                <img src={{myBooksData?.cover}} alt="Book">
+            </div>
+            <h3>{{myBooksData.title}}</h3>
+            <p>BY - {{myBooksData.author}}</p>
+            <p>${{myBooksData.price}}</p>
+            
+            <div class="actions">
+                <button routerLink="/Home/ChangeBook/{{myBooksData.id}}">EDIT</button>
+                <button (click)="deleteBook(myBooksData.id)">DELETE</button>
+            </div>
+            <a routerLink="/Home/Book/{{myBooksData.id}}">VIEW STATUS</a>
+    
+        </div>
+    
+    </div>
+    
+    
+    <div *ngIf="loginData && loginData.role === 'Buyer'" class="showorders">
+        
+        <div *ngIf="orderDetails.length == 0" class="nodata">
+            <img src="https://cdn.dribbble.com/users/633133/screenshots/3218559/media/3490827c0bba959b5bc92bb031f5dc05.png?resize=800x600&vertical=center" alt="">  
+        </div>
+        
+        <div *ngFor="let orderData of orderDetails" class="orderdescription">
+        
+            <div class="product">
+                <div class="productdetails">
+                    <h3>PRODUCT DETAILS</h3>
+                    <div class="productimage">
+                        <img [src]="'https://' + orderData?.book?.cover.replace('/https%3A/', '').replace('%3A', ':')" alt="Cover">
+                    </div>
+                    <h3>TITLE : {{orderData?.book.title}}</h3>
+                    <p>AUTHOR : {{orderData?.book.author}}</p>
+                    <p>PRICE : ${{orderData?.book.price}}</p>
+                    <div class="actions">
+                        <button (click)="initiateEditOrder(orderData)">EDIT ORDER</button>
+                        <button (click)="deleteOrder(orderData.id)">DELETE ORDER</button>
+                    </div>
+                </div>
+                
+                <div class="orderdetails">
+                    <h3>ORDER DETAILS</h3>
+                    <p>ADDRESS : {{orderData?.address}}</p>
+                    <p>QUANTITY : {{orderData?.quantity}}</p>
+                    <p>TOTAL : ${{orderData?.totalamount}}</p>
+                    <p>SOLD BY : {{orderData?.seller.storename}}</p>
+                    <div class="actions">
+                        <button (click)="getInvoice(orderData?.id)">VIEW BILL</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    
+    </div>
+
+<div *ngIf="updateOrder" class="purchasingorder">
+    <form method="POST" #purchasingorder="ngForm" (ngSubmit)="editOrder(purchasingorder.value)">
+      <div class="heading">
+        <h1>EDIT ORDER DETAILS</h1>
+        <h3>PURCHASING BOOK : {{selectedOrderData.book.title}}</h3>
+        <h3>FOR : ${{selectedOrderData.book.price}}</h3>
+      </div>
+      <textarea
+        name="address"
+        rows="10"
+        cols="50"
+        [(ngModel)] = "selectedOrderData.address"
+        placeholder="Enter Your Address"
+      ></textarea>
+      <input type="number" name="quantity" [(ngModel)]="selectedOrderData.quantity" placeholder="Total Book Quantity" />
+      <button type="submit">EDIT ORDER</button>
+    </form>
+    
+</div>

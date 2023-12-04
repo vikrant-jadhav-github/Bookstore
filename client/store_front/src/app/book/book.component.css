@@ -1,0 +1,58 @@
+.bookhome{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchbooks{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchbooks input{
+    width: 50%;
+    padding: 1rem;
+    text-align: center;
+}
+
+.searchbooks button{
+    padding: 1rem;
+    width: 10%;
+}
+
+.searchdetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.bookscollection{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 2rem;
+    column-gap: 3rem;
+}
+
+.books{
+    display: flex;
+    width: 20rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    border: 3px solid var(--primarybg);
+    padding: .7rem;
+}
+
+.books img{
+    width: 100%;
+    height: 17rem;
+}

@@ -1,0 +1,61 @@
+.authform {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .authform form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+  }
+  
+  .authform form input {
+    padding: 1em;
+    width: 35%;
+  }
+  
+  .authform form button {
+    padding: 1em;
+    width: 20%;
+  }
+  
+  .authform form p:hover {
+    cursor: pointer;
+  }
+  
+  .rolechoices {
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+    margin-right: 1rem;
+    align-items: center;
+  }
+  
+  .rolechoices select{
+    padding: .5rem;
+  }
+  
+  .buyerdata {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+  }
+  
+  .sellerdata {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }

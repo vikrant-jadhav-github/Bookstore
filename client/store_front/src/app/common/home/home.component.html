@@ -1,0 +1,76 @@
+<div *ngIf="loginData && loginData.role === 'Buyer'" class="buyerhome">
+  <div class="searchbooks">
+    <input type="text" placeholder="Search Books By Title, Author & Genre" [(ngModel)]="searchQuery" (ngModelChange)="search($event)" />
+  </div>
+
+  <div *ngIf="searchQuery" class="buyersearch">
+    <h1>{{searchedBooks.length > 0 ? searchedBooks.length + ' RESULTS FOUND' : 'NO RESULTS FOUND'}}</h1>
+    <div class="bookscollection">
+      <div *ngFor="let book of searchedBooks" class="books">
+        <img
+          src={{book.cover}}
+          alt="Marvel"
+        />
+        <p>{{ book.title.toUpperCase() }}</p>
+        <p>ONLY AT ${{ book.price }}</p>
+        <a routerLink="/Book/{{book.id}}">CHECK OUT NOW</a>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!searchQuery" class="bookscollection">
+    <div *ngFor="let book of bookData" class="books">
+      <img
+        src={{book.cover}}
+        alt="Marvel"
+      />
+      <p>{{ book.title.toUpperCase() }}</p>
+      <p>ONLY AT ${{ book.price }}</p>
+      <a routerLink="/Home/Book/{{book.id}}">CHECK OUT NOW</a>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loginData && loginData.role === 'Seller'" class="sellerhome">
+  <section>
+    <div class="banner">
+      <img
+        src="https://as2.ftcdn.net/v2/jpg/04/32/32/87/1000_F_432328795_gyl6zdxtuKrwTDLSOgLF2NfnHNLkg1oC.jpg"
+        alt="SellerPic"
+      />
+    </div>
+
+    <div class="welcome">
+      <h2>Welcome to Your Seller Dashboard!</h2>
+    </div>
+
+    <div class="description">
+      <p>Hello {{ loginData.name }},</p>
+      <p>
+        We're delighted to have you here at your Seller Dashboard. This is your
+        central hub for managing and growing your online store. From monitoring
+        your sales to updating your product catalog, you have the power to drive
+        success.
+      </p>
+      <p>
+        Feel free to explore the various sections of your dashboard to gain
+        valuable insights into your business performance. Whether you're a
+        seasoned seller or just starting, we're here to support you on your
+        journey.
+      </p>
+      <p>
+        If you have any questions or need assistance, our support team is just a
+        click away. Happy selling!
+      </p>
+    </div>
+
+    <div class="regards">
+      <h3>Regards,</h3>
+      <h2>BOOKSTORE</h2>
+    </div>
+  </section>
+</div>
+
+<div *ngIf="bookData.length === 0 && loginData.role === 'Buyer'" class="nodata">
+  <img src="https://cdn.dribbble.com/users/633133/screenshots/3218559/media/3490827c0bba959b5bc92bb031f5dc05.png?resize=800x600&vertical=center" alt="">  
+</div>

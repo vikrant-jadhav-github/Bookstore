@@ -1,0 +1,117 @@
+.buyerhome{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchbooks{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchbooks input{
+    width: 50%;
+    padding: 1rem;
+    text-align: center;
+}
+
+.searchbooks button{
+    padding: 1rem;
+    width: 10%;
+}
+
+.buyersearch{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.bookscollection{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 2rem;
+    column-gap: 3rem;
+    width: 90%;
+}
+
+.books{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    padding: .5rem;
+    border: 3px solid var(--primarybg);
+    width: 20rem;
+}
+
+.books img{
+    width: 100%;
+    height: 15rem;
+}
+
+.books button{
+    padding: 1rem;
+    width: 50%;
+}
+
+.sellerhome{
+    height: 100%;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.banner img{
+    width: 100%;
+}
+
+.description{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.purchasingorder{
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.purchasingorder form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+}
+
+.purchasingorder textarea{
+    padding: 1rem;
+}
+
+.purchasingorder input{
+    padding: 1rem;
+    width: 34%;
+}
+
+.purchasingorder button{
+    padding: 1rem;
+    width: 25%;
+}

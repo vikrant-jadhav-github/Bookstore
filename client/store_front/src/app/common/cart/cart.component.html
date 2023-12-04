@@ -1,0 +1,47 @@
+<div *ngIf="loginData && loginData.role === 'Buyer' && isPurchasing" class="purchasingorder">
+    <form method="POST" #purchasingorder="ngForm" (ngSubmit)="createOrder(purchasingorder.value)">
+      <div class="heading">
+        <h1>ORDER DETAILS</h1>
+        <h3>PURCHASING BOOK : {{purchasingBook.title.toUpperCase()}}</h3>
+        <h3>FOR : ${{purchasingBook.price}}</h3>
+      </div>
+      <textarea
+        name="address"
+        rows="10"
+        cols="50"
+        ngModel
+        placeholder="Enter Your Address"
+      ></textarea>
+      <input type="number" name="quantity" ngModel placeholder="Total Book Quantity" />
+      <button type="submit">ORDER</button>
+    </form>
+  </div>
+
+
+<div class="cart">
+  
+    <div class="heading">
+        <h1>CART</h1>
+    </div>
+    
+    <div class="cartitems">
+        <div *ngFor="let cartItem of cartItems" class="items">
+            <div class="cover">
+                <img src={{cartItem.cover}} alt="Book">
+            </div>
+            <h1>{{cartItem.title}}</h1>
+            <p>BY - {{cartItem.author}}</p>
+            <p>${{cartItem.price}}</p>
+            <div class="options">
+              <button (click)="initPurchase(cartItem.id, cartItem.seller.id, cartItem)" *ngIf="isLoggedIn">PURCHASE</button>
+              <button (click)="deleteItem(cartItem)">DELETE</button>
+              <button routerLink="/" *ngIf="!isLoggedIn">REGISTER OR LOGIN TO BUY</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="cartItems.length === 0" class="nodata">
+  <img src="https://cdn.dribbble.com/users/633133/screenshots/3218559/media/3490827c0bba959b5bc92bb031f5dc05.png?resize=800x600&vertical=center" alt="">
+</div>

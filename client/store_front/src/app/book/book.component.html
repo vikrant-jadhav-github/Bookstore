@@ -1,0 +1,36 @@
+<div class="bookhome">
+    <div class="searchbooks">
+        <input type="text" placeholder="Search Books By Title, Author & Genre" [(ngModel)]="searchQuery" (ngModelChange)="search($event)" />
+      </div>
+    
+      <div *ngIf="searchQuery" class="searchdetails">
+        <h1>{{searchedBooks?.length > 0 ? searchedBooks?.length + ' RESULTS FOUND' : 'NO RESULTS FOUND'}}</h1>
+        <div class="bookscollection">
+          <div *ngFor="let book of searchedBooks" class="books">
+            <img
+              src={{book.cover}}
+              alt="Marvel"
+            />
+            <h3>{{ book.title.toUpperCase() }}</h3>
+            <p>ONLY AT ${{ book.price }}</p>
+            <a routerLink="/Book/{{book.id}}">CHECK OUT NOW</a>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!searchQuery" class="bookscollection">
+        <div *ngFor="let book of bookData" class="books">
+          <img
+            src={{book.cover}}
+            alt="Marvel"
+          />
+          <h3>{{ book.title.toUpperCase() }}</h3>
+          <p>ONLY AT ${{ book.price }}</p>
+          <a routerLink="/Book/{{book.id}}">CHECK OUT NOW</a>
+        </div>
+      </div>
+</div>
+
+<div *ngIf="bookData.length === 0" class="nodata">
+    <img src="https://cdn.dribbble.com/users/633133/screenshots/3218559/media/3490827c0bba959b5bc92bb031f5dc05.png?resize=800x600&vertical=center" alt="">  
+</div>
