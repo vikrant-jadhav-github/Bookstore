@@ -11,6 +11,8 @@ from django.db.models import Q
 from rest_framework.permissions import IsAuthenticated, BasePermission
 from rest_framework.parsers import MultiPartParser, FormParser
 
+mircoUrl = 'http://localhost:3000'
+
 class IsAuthenticatedOrReadOnly(IsAuthenticated):
     def has_permission(self, request, view):
         if request.method == 'GET':
@@ -39,7 +41,7 @@ class BookView(APIView):
         }
 
         try:
-            microserviceresponse = requests.post('http://localhost:3000/create', data=data, files=files)
+            microserviceresponse = requests.post(mircoUrl+'/create', data=data, files=files)
             microserviceresponse.raise_for_status()
             return Response(microserviceresponse.json(), status=status.HTTP_200_OK)
         except requests.RequestException as e:
@@ -58,7 +60,7 @@ class BookView(APIView):
         }
 
         try:
-            microserviceresponse = requests.put("http://localhost:3000/update/"+str(pk), data=data, files=files)
+            microserviceresponse = requests.put(mircoUrl+"/update/"+str(pk), data=data, files=files)
             microserviceresponse.raise_for_status()
             return Response(microserviceresponse.json(), status=status.HTTP_200_OK)
         except requests.RequestException as e:
@@ -69,13 +71,13 @@ class BookView(APIView):
         user = request.user
         if user.role == 'Buyer':
             return Response({'status': 'error', 'message' : 'Buyer cannot delete book'}, status=status.HTTP_400_BAD_REQUEST)
-        microserviceresponse = requests.delete('http://localhost:3000/delete/'+str(pk))
+        microserviceresponse = requests.delete(mircoUrl+'/delete/'+str(pk))
         return Response(microserviceresponse.json(), status=status.HTTP_200_OK)
     
     def get(self, request, pk=None):
         
         if pk is not None:
-            microserviceresponse = requests.get('http://localhost:3000/'+str(pk))
+            microserviceresponse = requests.get(mircoUrl+'/'+str(pk))
             return Response(microserviceresponse.json(), status=status.HTTP_200_OK)
 
         query_params = request.query_params
@@ -85,10 +87,10 @@ class BookView(APIView):
         genre = query_params.get('genre', '').strip()
 
         if title or author or genre:
-            microserviceresponse = requests.get('http://localhost:3000/search?title='+title+'&author='+author+'&genre='+genre)
+            microserviceresponse = requests.get(mircoUrl+'/search?title='+title+'&author='+author+'&genre='+genre)
             return Response(microserviceresponse.json(), status=status.HTTP_200_OK)
 
-        microserviceresponse = requests.get('http://localhost:3000/')
+        microserviceresponse = requests.get(mircoUrl+'/')
         return Response(microserviceresponse.json(), status=status.HTTP_200_OK)
 
 class BookSeller(APIView):
@@ -99,6 +101,6 @@ class BookSeller(APIView):
         if user.role == 'Buyer':
             return Response({'status': 'error', 'message' : 'Buyer cannot fetch books'}, status=status.HTTP_400_BAD_REQUEST)
         seller = Seller.objects.get(user=user)
-        microserviceresponse = requests.get('http://localhost:3000/sellerbooks/'+str(seller.id))
+        microserviceresponse = requests.get(mircoUrl+'/sellerbooks/'+str(seller.id))
         return Response(microserviceresponse.json(), status=status.HTTP_200_OK)
     

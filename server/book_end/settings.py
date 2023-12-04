@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-*&y@6sbfo0bfj)^zi=z=ob7l29)9zvul%tu-up(!1g&ubf#$1^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -142,8 +142,7 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-    "http://127.0.0.1:4200",
+    "http://bookstorebuckethosting.s3-website.ap-south-1.amazonaws.com",
 ]
 
 # Internationalization
