@@ -11,7 +11,7 @@ from django.db.models import Q
 from rest_framework.permissions import IsAuthenticated, BasePermission
 from rest_framework.parsers import MultiPartParser, FormParser
 
-mircoUrl = 'http://localhost:3000'
+mircoUrl = 'http://13.126.195.107:3000'
 
 class IsAuthenticatedOrReadOnly(IsAuthenticated):
     def has_permission(self, request, view):
