@@ -104,7 +104,7 @@ deleteOrderApi(id: number, token: any) {
 
 getInvoiceApi(id: number, token: any) {
   this.loaderservice.showLoader();
-  const url = `http://localhost:8000/api/v1/account/bill/${id}/`;
+  const url = `http://13.126.195.107:8000/api/v1/account/bill/${id}/`;
 
   this.http.get(url, {
     headers: { 'Authorization': 'Bearer ' + token },
