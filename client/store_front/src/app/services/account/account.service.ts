@@ -105,7 +105,7 @@ export class AccountService {
       },
       (error) => {
         this.loaderservice.hideLoader();
-        this.toastr.error('An unexpected error occurred. Please try again later.', 'Error');
+        this.toastr.error('We are fixing the issue. Please try again later.', 'Error');
         console.error(error);
       }
     );
@@ -152,7 +152,7 @@ export class AccountService {
       },
       (error) => {
         this.loaderservice.hideLoader();
-        this.toastr.error('An unexpected error occurred. Please try again later.', 'Error');
+        this.toastr.error('Check your credentials, And try again.', 'Error');
         console.error(error);
       }
     );
