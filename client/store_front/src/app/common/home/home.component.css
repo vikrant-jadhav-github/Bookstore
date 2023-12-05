@@ -35,9 +35,9 @@
 .bookscollection{
     display: grid;
     grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     row-gap: 2rem;
-    column-gap: 3rem;
+    column-gap: 1rem;
     width: 90%;
 }
 
