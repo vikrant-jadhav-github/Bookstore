@@ -39,6 +39,12 @@ export class UserauthComponent implements OnInit{
 
     this.accountservice.registerApi(data);
 
+    this.accountservice.isSuccess$.subscribe((data) => {
+      if(data){
+        this.isRegistered = true;
+      }
+    })
+    
   }
 
   login(data: login) {

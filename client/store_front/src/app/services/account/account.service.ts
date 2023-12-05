@@ -16,6 +16,9 @@ export class AccountService {
   private tokenSubject = new BehaviorSubject<string>('');
   public tokenData$ = this.tokenSubject.asObservable();
 
+  private isSuccessSubject = new BehaviorSubject<boolean>(false);
+  public isSuccess$ = this.isSuccessSubject.asObservable();
+
   private loginSubject = new BehaviorSubject<any>({});
   public loginData$ = this.loginSubject.asObservable();
 
@@ -96,19 +99,9 @@ export class AccountService {
           return;
         }
 
-        const jsondata: any = httpresponse.body;
-        const user = jsondata.user;
-
-        this.loginSubject.next(user);
-        this.isUserLoggedInSubject.next(true);
-        this.tokenSubject.next(jsondata.token.access);
-
-        localStorage.setItem('token', jsondata.token.access);
-        localStorage.setItem('loginData', JSON.stringify(user));
-
         this.toastr.success('Registration successful', 'Success');
         this.loaderservice.hideLoader();
-        this.router.navigate(['Home']);
+        this.isSuccessSubject.next(true);
       },
       (error) => {
         this.loaderservice.hideLoader();
