@@ -105,7 +105,11 @@ export class AccountService {
       },
       (error) => {
         this.loaderservice.hideLoader();
-        this.toastr.error('We are fixing the issue. Please try again later.', 'Error');
+        const httpresponseError = error;
+        if(httpresponseError.error.email)
+          this.toastr.error('Email already exists, Choose a different email', 'Error');
+        else
+          this.toastr.error('We are fixing the issue. Please try again later.', 'Error');
         console.error(error);
       }
     );
@@ -128,7 +132,8 @@ export class AccountService {
         const httpresponse: any = response;
 
         if (httpresponse.status !== 200) {
-          this.toastr.error('Invalid email or password', 'Error');
+          const jsondata: any = httpresponse.body;
+          this.toastr.error(jsondata.message, 'Error');
           this.loaderservice.hideLoader();
           return;
         }
@@ -152,7 +157,8 @@ export class AccountService {
       },
       (error) => {
         this.loaderservice.hideLoader();
-        this.toastr.error('Check your credentials, And try again.', 'Error');
+        const httpErrorResponse: any = error;
+        this.toastr.error(httpErrorResponse.error.message, 'Error');
         console.error(error);
       }
     );

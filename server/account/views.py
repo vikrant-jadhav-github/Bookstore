@@ -65,12 +65,16 @@ class Login(APIView):
         serialize.is_valid(raise_exception=True)
         email = serialize.data.get('email')
         password = serialize.data.get('password')
+        try:
+            account = get_object_or_404(User, email=email)
+        except:
+            return Response({'status': 'error', 'message' : 'Please register first'}, status=status.HTTP_201_CREATED)
         user = authenticate(email=email, password=password)
         if user:
             token = getToken(user)
             userserializer = UserRegistrationSerializer(user)
             return Response({'token' : token, 'status': 'ok', 'message' : 'User logged in successfully', 'user' : userserializer.data}, status=status.HTTP_200_OK)
-        return Response({'status': 'error', 'message' : 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'status': 'error', 'message' : 'Invalid credentials, Please check again'}, status=status.HTTP_401_UNAUTHORIZED)
     
 class Profile(APIView):
     permission_classes = [IsAuthenticated]
