@@ -50,6 +50,11 @@ button{
     border-radius: 2rem;
 }
 
+button:hover {
+    transition: .3s linear;
+    background: black;
+}
+
 .nodata{
     position: absolute;
     height: 80%;

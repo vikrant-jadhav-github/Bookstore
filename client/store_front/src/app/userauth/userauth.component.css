@@ -26,8 +26,17 @@
     width: 20%;
   }
   
+  .authform form p {
+    background: var(--primarybg);
+    padding: 1rem;
+    width: 19rem;
+    border-radius: 2rem;
+  }
+
   .authform form p:hover {
+    transition: .3s linear;
     cursor: pointer;
+    background: black;
   }
   
   .rolechoices {

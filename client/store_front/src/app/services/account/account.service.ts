@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from '../loader/loader.service';
 import { ApiconfigService } from '../apiconfig/apiconfig.service';
+import * as EmailValidator from 'email-validator';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,20 @@ export class AccountService {
     ) {
       this.domain = this.apiservice.getDomain() + `/api/v1/account/`;
     }
-    
+
+  isValidEmail(email: string): boolean {
+      const emailRegex = /^[^\s@]+@gmail\.com$/;
+      return emailRegex.test(email);
+  }
+
+  isValidPassword(password: string): boolean {
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    return hasUppercase && hasLowercase && hasDigit && (hasSpecialChar || true);
+  }
+
   registerApi(data: any) {
 
     const userdata = data.userdata;
@@ -40,6 +54,21 @@ export class AccountService {
 
     if (!userdata.email || !userdata.name || !userdata.password || !userdata.password2) {
       this.toastr.error('Please fill in all required fields', 'Error');
+      return;
+    }
+
+    if (!this.isValidEmail(userdata.email)) {
+      this.toastr.error('Invalid email address, Please enter a valid email', 'Error');
+      return;
+    }
+
+    if (!this.isValidPassword(userdata.password)) {
+      this.toastr.error('Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character', 'Error');
+      return;
+    }
+
+    if (userdata.password !== userdata.password2) {
+      this.toastr.error('Passwords do not match', 'Error');
       return;
     }
 
@@ -94,6 +123,12 @@ export class AccountService {
       this.toastr.error('Please enter both email and password', 'Error');
       return;
     }
+
+    if (!EmailValidator.validate(data.email)) {
+      this.toastr.error('Invalid email address', 'Error');
+      return;
+    }
+
     this.loaderservice.showLoader();
     this.http.post(`${this.domain}login/`, data, { observe: 'response' }).subscribe(
       (response) => {
