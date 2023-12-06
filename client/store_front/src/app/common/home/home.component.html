@@ -6,7 +6,7 @@
   <div *ngIf="searchQuery" class="buyersearch">
     <h1>{{searchedBooks.length > 0 ? searchedBooks.length + ' RESULTS FOUND' : 'NO RESULTS FOUND'}}</h1>
     <div class="bookscollection">
-      <div *ngFor="let book of searchedBooks" class="books">
+      <div *ngFor="let book of searchedBooks" class="books" (click)="goToBook(book.id)">
         <img
           src={{book.cover}}
           alt="Marvel"

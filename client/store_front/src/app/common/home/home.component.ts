@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { BookService } from './../../services/book/book.service';
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../services/account/account.service';
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit{
   searchQuery: any = "";
   searchedBooks: any = [];
 
-  constructor(private accountservice : AccountService, private bookservice : BookService) { }
+  constructor(private router: Router, private accountservice : AccountService, private bookservice : BookService) { }
 
   ngOnInit(): void {
 
@@ -51,6 +52,10 @@ export class HomeComponent implements OnInit{
     if(bookData)
       this.bookData = bookData
     
+  }
+
+  goToBook(id: any){
+    this.router.navigate(['/Book', id]);
   }
 
   search(value: any){
