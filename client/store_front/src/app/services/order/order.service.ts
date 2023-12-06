@@ -42,9 +42,6 @@ createOrderApi(data: any, token: any) {
 }
 
 getOrdersApi(token: any) {
-  try{
-    this.loaderservice.showLoader();
-  
     return this.http.get(this.domain, { 'observe': 'response', headers: { 'Authorization': 'Bearer ' + token } }).pipe(
       catchError(error => {
         this.toastr.error('Failed to fetch orders', 'Error');
@@ -52,10 +49,6 @@ getOrdersApi(token: any) {
         throw error;
       })
     );
-  }
-  finally{
-    this.loaderservice.hideLoader();
-  }
 }
 
 updateOrderApi(data: any, token: any, id: number) {

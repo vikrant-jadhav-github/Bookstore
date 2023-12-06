@@ -145,7 +145,7 @@ export class AccountService {
         this.isUserLoggedInSubject.next(true);
         this.tokenSubject.next(jsondata.token.access);
 
-        const expiry = new Date().getTime() * 10 * 60 * 1000;
+        const expiry = new Date().getTime() + (1000 * 20 * 60);
 
         localStorage.setItem('time', JSON.stringify(expiry));
         localStorage.setItem('token', jsondata.token.access);

@@ -1,5 +1,6 @@
 <div *ngIf="loginData && loginData.role === 'Buyer' && isPurchasing" class="purchasingorder">
-    <form method="POST" #purchasingorder="ngForm" (ngSubmit)="createOrder(purchasingorder.value)">
+    
+  <form *ngIf="!isPurchasingAll" method="POST" #purchasingorder="ngForm" (ngSubmit)="createOrder(purchasingorder.value)">
       <div class="heading">
         <h1>ORDER DETAILS</h1>
         <h3>PURCHASING BOOK : {{purchasingBook.title.toUpperCase()}}</h3>
@@ -14,7 +15,26 @@
       ></textarea>
       <input type="number" name="quantity" ngModel placeholder="Total Book Quantity" />
       <button type="submit">ORDER</button>
+      <button (click)="isPurchasing = !isPurchasing" >CANCEL</button>
     </form>
+
+    <form *ngIf="isPurchasingAll" method="POST" #purchasingorder="ngForm" (ngSubmit)="purchaseAll(purchasingorder.value)">
+      <div class="heading">
+        <h1>ORDER DETAILS</h1>
+        <h3>PURCHASING ALL</h3>
+        <h3>FOR : ${{totalprice}}</h3>
+      </div>
+      <textarea
+        name="address"
+        rows="10"
+        cols="50"
+        ngModel
+        placeholder="Enter Your Address"
+      ></textarea>
+      <button type="submit">ORDER</button>
+      <button (click)="isPurchasing = !isPurchasing" >CANCEL</button>
+    </form>
+
   </div>
 
 
@@ -23,6 +43,12 @@
     <div class="heading">
         <h1>CART</h1>
     </div>
+
+    <div *ngIf="totalprice" class="purchaseall">
+        <button *ngIf="isLoggedIn" (click)="initPurchaseAll()">PURCHASE ALL</button>
+        <button *ngIf="!isLoggedIn" routerLink="/">REGISTER OR LOGIN TO PURCHASE ALL</button>
+        <h3>TOTAL ${{totalprice}}</h3>
+    </div>
     
     <div class="cartitems">
         <div *ngFor="let cartItem of cartItems" class="items">
@@ -30,8 +56,9 @@
                 <img src={{cartItem.cover}} alt="Book">
             </div>
             <h1>{{cartItem.title}}</h1>
-            <p>BY - {{cartItem.author}}</p>
-            <p>${{cartItem.price}}</p>
+            <p>BY - {{cartItem.author.toUpperCase()}}</p>
+            <p>${{cartItem.price}} PER BOOK</p>
+            <p>REQUESTED QUANTITY - {{cartItem.quantity}}</p>
             <div class="options">
               <button (click)="initPurchase(cartItem.id, cartItem.seller.id, cartItem)" *ngIf="isLoggedIn">PURCHASE</button>
               <button (click)="deleteItem(cartItem)">DELETE</button>

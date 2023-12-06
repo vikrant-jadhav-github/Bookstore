@@ -18,8 +18,10 @@ export class CartService{
 
   constructor(private loaderservice : LoaderService,private router: Router, private toastr: ToastrService, private accountservice : AccountService) { }
 
-  addToCart(item: any) {
+  addToCart(item: any, quantity: any) {
     try {
+      item.quantity = quantity;
+      
       this.loaderservice.showLoader();
       this.cartItems.push(item);
       this.cartItemssubject.next(this.cartItems);
@@ -105,6 +107,7 @@ export class CartService{
       this.cartItems = [];
       this.cartItemssubject.next(this.cartItems);
       localStorage.removeItem('cartItems');
+      this.toastr.success('Cart cleared successfully.', 'Success');
     } catch (error) {
       this.toastr.error('An unexpected error occurred while clearing the cart.', 'Error');
       console.error(error);

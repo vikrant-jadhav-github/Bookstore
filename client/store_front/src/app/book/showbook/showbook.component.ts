@@ -13,6 +13,7 @@ export class ShowbookComponent implements OnInit{
 
   loginData: any = {};
   bookData: any = {};
+  quantity: any = 1;
   isLoggedIn: boolean = false;
 
   constructor(private accountservice : AccountService,private bookservice : BookService, private route : ActivatedRoute, private router : Router, private cartservice : CartService) {}
@@ -41,7 +42,7 @@ export class ShowbookComponent implements OnInit{
   }
 
   addToCart(data: any){
-    this.cartservice.addToCart(data);
+    this.cartservice.addToCart(data, this.quantity);
   }
 
   checkOut(){

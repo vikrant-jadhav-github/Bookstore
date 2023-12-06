@@ -35,6 +35,19 @@
     padding: 1rem;
 }
 
+.buyoptions{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.buyoptions input{
+    height: 2.5rem;
+    width: 5rem;
+    text-align: center;
+}
+
 .buyoptions button{
     padding: 1.5rem;
 }

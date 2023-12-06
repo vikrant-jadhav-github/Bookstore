@@ -36,7 +36,7 @@
 }
 
 .cover{
-    height: 20rem;
+    height: 15rem;
     width: 100%;
 }
 
@@ -95,4 +95,18 @@
 .purchasingorder button{
     padding: 1rem;
     width: 25%;
+}
+
+.purchaseall{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border: 2px solid var(--primarybg);
+    padding: 1rem;
+}
+
+.purchaseall button{
+    padding: 1rem;
+
 }

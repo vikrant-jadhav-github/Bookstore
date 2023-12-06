@@ -14,9 +14,11 @@ export class CartComponent implements OnInit{
   cartItems: any = []
 
   isPurchasing: boolean = false;
+  isPurchasingAll: boolean = false;
   purchasingBookId: any = "";
   sellerId: any = "";
   token: any = "";
+  totalprice = 0;
 
   loginData: any = {};
   purchasingData: any = {};
@@ -52,7 +54,13 @@ export class CartComponent implements OnInit{
 
     if(loginData)
       this.loginData = loginData
+
+    this.totalprice = this.cartItems.reduce((acc: number, item: any) => {
+      acc += (item.price * item.quantity)
+      return acc
+    }, 0)
     
+      
   }
   createOrder(data: any){
     data.book = this.purchasingBookId;
@@ -74,6 +82,28 @@ export class CartComponent implements OnInit{
   deleteItem(item: any){
     this.cartservice.removeFromCart(item);
     this.cartItems = this.cartservice.getCartItems();
+  }
+
+  initPurchaseAll(){
+    this.isPurchasingAll = true;
+    this.isPurchasing = true;
+  }
+
+  purchaseAll(data: any){
+    const address = data.address
+    let jsonData: any = [];
+    this.cartItems.forEach((item: any) => {
+      jsonData.push({
+        book : item.id,
+        quantity : item.quantity,
+        address : address,
+        seller : item.seller.id,
+      })
+    })
+    this.orderservice.createOrderApi(jsonData, this.token);
+    this.isPurchasing = false;
+    this.isPurchasingAll = false;
+    this.cartservice.clearCart();
   }
 
 }

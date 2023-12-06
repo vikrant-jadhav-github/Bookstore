@@ -19,6 +19,8 @@
             <h3>TOTAL AVAILABLE : {{bookData.totalavailable}}</h3>
             <h3>SOLD BY : {{loginData && loginData.role === 'Seller' ? 'YOU' : bookData.seller?.storename}}</h3>
             <div *ngIf="loginData.role !== 'Seller'" class="buyoptions">
+                <label for="quantity">Enter Quantity</label>
+                <input type="number" name="quantity" [(ngModel)]="quantity" min="1" max="{{bookData.totalavailable}}">
                 <button (click)="addToCart(bookData)">ADD TO CART</button>
             </div>
         </div>

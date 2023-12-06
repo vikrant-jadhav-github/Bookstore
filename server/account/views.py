@@ -152,6 +152,38 @@ class OrderView(APIView):
         user = request.user
         jsondata = request.data
 
+        if isinstance(jsondata, list):
+            orders = []
+            for order_data in jsondata:
+                seller_id = order_data.get('seller')
+                book_id = order_data.get('book')
+
+                if user.role == 'Seller':
+                    return Response({'status': 'error', 'message': 'Seller cannot place an order'}, status=status.HTTP_400_BAD_REQUEST)
+
+                buyer = Buyer.objects.get(user=user)
+                book = Book.objects.get(pk=book_id)
+                seller = Seller.objects.get(pk=seller_id)
+
+                with transaction.atomic():
+                    seller.totalproductsold += 1
+                    seller.save()
+
+                    book.totalsold += order_data.get('quantity', 0)
+                    book.totalavailable -= order_data.get('quantity', 0)
+                    book.save()
+
+                    order_data['buyer'] = buyer.id
+                    order_data['seller'] = seller.id
+                    order_data['book'] = book.id
+                    order_data['totalamount'] = book.price * order_data.get('quantity', 0)
+
+                    serializer = OrderSerializer(data=order_data)
+                    if serializer.is_valid():
+                        orders.append(serializer.save())
+
+            return Response({'status': 'ok', 'message': 'Bulk orders processed successfully', 'orders': OrderSerializer(orders, many=True).data}, status=status.HTTP_200_OK)
+
         sellerid = jsondata['seller']
         bookid = jsondata['book']
 
@@ -162,7 +194,6 @@ class OrderView(APIView):
         book = Book.objects.get(pk=bookid)
         seller = Seller.objects.get(pk=sellerid)
 
-        # Use a database transaction to ensure data consistency
         with transaction.atomic():
             seller.totalproductsold += 1
             seller.save()
@@ -293,3 +324,4 @@ class GenerateBill(APIView):
             elements = [title_table, table]
             p.build(elements)
             return response
+    

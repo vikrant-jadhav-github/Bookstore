@@ -1,3 +1,4 @@
+import { LoaderService } from './../../../services/loader/loader.service';
 import { AccountService } from './../../../services/account/account.service';
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../../services/book/book.service';
@@ -18,9 +19,11 @@ export class MybooksComponent implements OnInit{
   orderDetails : any = [];
   loginData: any = {};
 
-  constructor(private accountservice : AccountService, private bookserice : BookService, private orderservice : OrderService) { }
+  constructor(private loaderservice : LoaderService, private accountservice : AccountService, private bookserice : BookService, private orderservice : OrderService) { }
 
   ngOnInit(): void {
+
+    this.loaderservice.showLoader();
 
     this.accountservice.tokenData$.subscribe((data) => {
       this.token = data;
@@ -54,6 +57,8 @@ export class MybooksComponent implements OnInit{
         this.orderDetails = jsondata.data;
       })
     }
+
+    this.loaderservice.hideLoader();
 
   }
 
