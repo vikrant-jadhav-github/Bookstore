@@ -22,8 +22,6 @@ export class BookComponent implements OnInit{
   }
 
   goToBook(id: any){
-    console.warn(id);
-    
     this.router.navigate(['/Book', id]);
   }
 
