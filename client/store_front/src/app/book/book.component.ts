@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { BookService } from '../services/book/book.service';
 
@@ -11,13 +12,19 @@ export class BookComponent implements OnInit{
   searchQuery: any = "";
   searchedBooks: any = [];
 
-  constructor(private bookservice : BookService) {}
+  constructor(private router: Router, private bookservice : BookService) {}
 
   ngOnInit(): void {
     this.bookservice.getAllBooksApi();
     this.bookservice.bookData$.subscribe((data) => {
       this.bookData = data;
     })
+  }
+
+  goToBook(id: any){
+    console.warn(id);
+    
+    this.router.navigate(['/Book', id]);
   }
 
   search(value: any){

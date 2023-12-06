@@ -26,6 +26,7 @@ nav{
     justify-content: center;
     align-items: center;
     gap: 0.3em;
+    cursor: default;
 }
 
 .product img{

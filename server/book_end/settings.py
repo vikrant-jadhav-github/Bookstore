@@ -143,6 +143,7 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://bookstorebuckethosting.s3-website.ap-south-1.amazonaws.com",
+    "http://localhost:4200",
 ]
 
 # Internationalization

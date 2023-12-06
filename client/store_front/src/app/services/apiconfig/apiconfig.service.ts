@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ApiconfigService {
 
-  private domain = `http://13.126.195.107:8000`;
+  private domain = `http://localhost:8000`;
 
   constructor() { }
 
