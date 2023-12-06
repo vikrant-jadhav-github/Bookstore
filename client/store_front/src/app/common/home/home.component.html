@@ -19,7 +19,7 @@
   </div>
 
   <div *ngIf="!searchQuery" class="bookscollection">
-    <div *ngFor="let book of bookData" class="books">
+    <div *ngFor="let book of bookData" class="books" (click)="goToBook(book.id)">
       <img
         src={{book.cover}}
         alt="Marvel"

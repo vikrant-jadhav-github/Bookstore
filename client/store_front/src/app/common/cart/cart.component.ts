@@ -18,6 +18,7 @@ export class CartComponent implements OnInit{
   purchasingBookId: any = "";
   sellerId: any = "";
   token: any = "";
+  reqestedQuantity: number = 1;
   totalprice = 0;
 
   loginData: any = {};
