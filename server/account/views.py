@@ -33,7 +33,6 @@ def getToken(User):
 
 class Register(APIView):
     def post(self, request):
-
         userdata = request.data['userdata']
         roledata = request.data['roledata']
         buyer = True if userdata['role'] == 'Buyer' else False
@@ -151,7 +150,6 @@ class OrderView(APIView):
     def post(self, request):
         user = request.user
         jsondata = request.data
-
         if isinstance(jsondata, list):
             orders = []
             for order_data in jsondata:
@@ -210,7 +208,6 @@ class OrderView(APIView):
 
             serializer = OrderSerializer(data=jsondata)
             if serializer.is_valid():
-                print("HELLO")
                 orderdata = serializer.save()
 
                 invoicedata = {

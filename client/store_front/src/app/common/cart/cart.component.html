@@ -13,7 +13,7 @@
         ngModel
         placeholder="Enter Your Address"
       ></textarea>
-      <h3>ORDERING {{purchasingBook.quantity}} QUANTITY</h3>
+      <input type="number" name="quantity" [(ngModel)]="purchasingBook.quantity" placeholder="Total Book Quantity" />
       <button type="submit">ORDER</button>
       <button (click)="isPurchasing = !isPurchasing" >CANCEL</button>
     </form>
